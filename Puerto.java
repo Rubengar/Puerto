@@ -18,7 +18,7 @@ public class Puerto
     {   
       int posicionEnLaQueQuedaElBarco = -1;
       int contador = 0;
-      while(contador<alquileres.size() && posicionEnLaQueQuedaElBarco==-1) {
+      while(contador<=alquileres.size() && posicionEnLaQueQuedaElBarco==-1) {
         if(alquileres.get(contador)==null){
              posicionEnLaQueQuedaElBarco = contador;
              Alquiler alquiler= new Alquiler(numeroDias,cliente,barco);
@@ -55,7 +55,8 @@ public class Puerto
       if(posicion >= 0){
         if(alquileres.get(posicion) !=   null){
           valor = alquileres.get(posicion).getCosteAlquiler();
-          alquileres.add(posicion,null);
+          Alquiler alquiler= new Alquiler(0,null,null);
+          alquileres.add(posicion,alquiler);
         }
       }
       return valor;
