@@ -1,14 +1,14 @@
+import java.util.*;
 public class Puerto
 {
-    private static final int NUMERO_AMARRES = 4;
-    private Alquiler[] alquileres;
+   private ArrayList<Alquiler> alquileres;
 
     /**
      * Constructor for objects of class Puerto
      */
     public Puerto()
     {
-        alquileres = new Alquiler[NUMERO_AMARRES];
+        alquileres = new ArrayList<>();
     }
     
     /**
@@ -18,12 +18,13 @@ public class Puerto
     {   
       int posicionEnLaQueQuedaElBarco = -1;
       int contador = 0;
-      while(contador<alquileres.length && posicionEnLaQueQuedaElBarco==-1) {
-        if(alquileres[contador]==null){
-        		posicionEnLaQueQuedaElBarco = contador;
-          	alquileres[contador] = new Alquiler(numeroDias,cliente,barco);
+      while(contador<alquileres.size() && posicionEnLaQueQuedaElBarco==-1) {
+        if(alquileres.get(contador)==null){
+             posicionEnLaQueQuedaElBarco = contador;
+             Alquiler alquiler= new Alquiler(numeroDias,cliente,barco);
+             alquileres.add(contador,alquiler);
         }
-      	contador++;
+        contador++;
       }
       return posicionEnLaQueQuedaElBarco;
     }
@@ -33,14 +34,14 @@ public class Puerto
      */
     public void verEstadoAmarres()
     {
-      for(int i = 0;i <alquileres.length;i++) {
-      	 System.out.println("Amarre nº" + i);
-      	 if(alquileres[i] == null) {
+      for(int i = 0;i <alquileres.size();i++) {
+         System.out.println("Amarre nº" + i);
+         if(alquileres.get(i) == null) {
             System.out.println("Libre");
          }
          else{
-        		System.out.println("ocupado");
-            System.out.println(alquileres[i]);
+                System.out.println("ocupado");
+            System.out.println(alquileres.get(i));
         }      
      }
   }
@@ -51,13 +52,13 @@ public class Puerto
     public float liquidarAlquiler(int posicion)
     {
       float valor = -1;
-      if(posicion < NUMERO_AMARRES && posicion >= 0){
-        if(alquileres[posicion] != null){
-        	valor = alquileres[posicion].getCosteAlquiler();
-          alquileres[posicion] = null;
+      if(posicion >= 0){
+        if(alquileres.get(posicion) !=   null){
+          valor = alquileres.get(posicion).getCosteAlquiler();
+          alquileres.add(posicion,null);
         }
       }
-	    return valor;
+      return valor;
     }
 
 }
